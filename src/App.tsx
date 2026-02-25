@@ -7,8 +7,6 @@ import LoadingOverlay from "./LoadingOverlay";
 import ScoreCompare from "./ScoreCompare";
 import "./App.css";
 
-const EMPTY_URLS = Array(10).fill("");
-
 function App() {
   const [input, setInput] = useState("");
   const [result, setResult] = useState<BalanceResponse | null>(null);
@@ -89,14 +87,8 @@ function App() {
         <div className="section-label">
           <span>Player Roster</span>
           <div className="fill-indicator">
-            <div className="fill-bar-track">
-              <div
-                className="fill-bar-fill"
-                style={{ width: `${(filledCount / 10) * 100}%` }}
-              />
-            </div>
-            <span className={`fill-count ${filledCount === 10 ? "fill-ready" : ""}`}>
-              {filledCount}/10
+          <span className={`fill-count ${filledCount >= 2 ? "fill-ready" : ""}`}>
+              {filledCount} players
             </span>
           </div>
         </div>
@@ -114,7 +106,7 @@ function App() {
         {error && <p className="error">{error}</p>}
 
         <button
-          className={`balance-btn ${filledCount === 10 ? "btn-ready" : ""}`}
+          className={`balance-btn ${filledCount >= 2 ? "btn-ready" : ""}`}
           onClick={handleSubmit}
           disabled={loading}
         >
