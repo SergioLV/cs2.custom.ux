@@ -10,23 +10,19 @@ import "./App.css";
 const EMPTY_URLS = Array(10).fill("");
 
 function App() {
-  const [urls, setUrls] = useState<string[]>(EMPTY_URLS);
+  const [input, setInput] = useState("");
   const [result, setResult] = useState<BalanceResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [showResults, setShowResults] = useState(false);
   const resultsRef = useRef<HTMLElement>(null);
 
-  const filledCount = urls.filter((u) => u.trim()).length;
-
-  const updateUrl = (i: number, val: string) => {
-    setUrls((prev) => prev.map((u, idx) => (idx === i ? val : u)));
-  };
+  const lines = input.split("\n").map((l) => l.trim()).filter(Boolean);
+  const filledCount = lines.length;
 
   const handleSubmit = async () => {
-    const filled = urls.map((u) => u.trim()).filter(Boolean);
-    if (filled.length !== 10) {
-      setError("Need exactly 10 vanity URLs");
+    if (filledCount < 2) {
+      setError("Paste at least 2 players");
       return;
     }
     setError("");
@@ -34,7 +30,7 @@ function App() {
     setResult(null);
     setShowResults(false);
     try {
-      const data = await balanceTeams(filled);
+      const data = await balanceTeams(lines);
       setResult(data);
       // Small delay for the reveal animation
       setTimeout(() => {
@@ -106,28 +102,13 @@ function App() {
         </div>
 
         <div className="input-grid">
-          {urls.map((url, i) => (
-            <div key={i} className={`input-row ${url.trim() ? "has-value" : ""}`}>
-              <span className={`player-num ${url.trim() ? "num-active" : ""}`}>
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <input
-                type="text"
-                value={url}
-                onChange={(e) => updateUrl(i, e.target.value)}
-                placeholder={`https://steamcommunity.com/id/player${i + 1}`}
-                className="vanity-input"
-                onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-              />
-              {url.trim() && (
-                <span className="check-mark">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4dff88" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </span>
-              )}
-            </div>
-          ))}
+          <textarea
+            className="vanity-input paste-area"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder={"Paste player info here, one per line...\ne.g.\nhttps://steamcommunity.com/id/player1\nhttps://steamcommunity.com/id/player2"}
+            rows={10}
+          />
         </div>
 
         {error && <p className="error">{error}</p>}
