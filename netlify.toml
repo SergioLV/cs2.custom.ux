@@ -3,6 +3,12 @@
   publish = "dist"
 
 [[redirects]]
+  from = "/balance"
+  to = "https://8wq7aoimmk.execute-api.us-east-1.amazonaws.com/prod/balance"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
