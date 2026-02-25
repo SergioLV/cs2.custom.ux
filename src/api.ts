@@ -1,4 +1,4 @@
-import { BalanceResponse } from "./types";
+import type { BalanceResponse } from "./types";
 
 export async function balanceTeams(vanityUrls: string[]): Promise<BalanceResponse> {
   const res = await fetch("/balance", {
