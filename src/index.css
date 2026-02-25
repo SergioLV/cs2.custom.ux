@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
 
 *,
 *::before,
@@ -9,22 +9,25 @@
 }
 
 :root {
-  --bg: #08080c;
-  --surface: rgba(18, 18, 26, 0.7);
-  --surface-solid: #12121a;
-  --surface2: rgba(26, 26, 38, 0.8);
-  --border: rgba(255, 255, 255, 0.06);
-  --border-hover: rgba(255, 255, 255, 0.12);
-  --text: #eaeaf2;
-  --text-dim: #6b6b82;
+  --bg: #06060a;
+  --surface: rgba(14, 14, 22, 0.75);
+  --surface-solid: #0e0e16;
+  --surface2: rgba(22, 22, 34, 0.85);
+  --border: rgba(255, 255, 255, 0.05);
+  --border-hover: rgba(255, 255, 255, 0.1);
+  --text: #eaeaf4;
+  --text-dim: #5a5a72;
   --ct: #4da6ff;
-  --ct-soft: rgba(77, 166, 255, 0.12);
-  --ct-glow: rgba(77, 166, 255, 0.25);
+  --ct-soft: rgba(77, 166, 255, 0.1);
+  --ct-glow: rgba(77, 166, 255, 0.3);
+  --ct-bright: #7dc4ff;
   --t: #ffb347;
-  --t-soft: rgba(255, 179, 71, 0.12);
-  --t-glow: rgba(255, 179, 71, 0.25);
+  --t-soft: rgba(255, 179, 71, 0.1);
+  --t-glow: rgba(255, 179, 71, 0.3);
+  --t-bright: #ffc970;
   --accent: #ff6b35;
-  --accent-glow: rgba(255, 107, 53, 0.3);
+  --accent-glow: rgba(255, 107, 53, 0.35);
+  --green: #4dff88;
   --error: #ff5c5c;
   --radius: 16px;
   --radius-sm: 10px;
@@ -42,4 +45,26 @@ body {
 #root {
   min-height: 100vh;
   position: relative;
+}
+
+::selection {
+  background: rgba(255, 107, 53, 0.3);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
